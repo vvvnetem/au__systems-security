@@ -1,0 +1,60 @@
+%\usepackage{multicol}
+\usepackage[pdftex]{graphicx}
+\usepackage[T1]{fontenc} 
+%\usepackage{fouriernc}
+%\usepackage{mathtools}
+\usepackage{amsfonts,amsmath,amssymb,amsthm} 
+\usepackage[a4paper, hmargin={2.5cm,2.5cm}, vmargin={2.5cm,2.5cm}]{geometry} 
+% ------------------------
+\usepackage{multicol} % to switch between 1, 1-2, n multicolumn mode
+\usepackage{chngcntr} % reset footnote for each chapter
+\usepackage{fancyhdr} % headline
+\usepackage{enumerate}
+\usepackage{wasysym} % symbols
+\usepackage{faktor}%for factor rings 
+\usepackage{ marvosym }
+\usepackage{ragged2e}
+\usepackage{blindtext}
+%\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{newclude}   % include() files without auto pagebreak
+\usepackage{xcolor}     % for color coding
+\usepackage{nameref}    % reference lslistings based on the option [label=]
+% Turn of Links for toc, loc, lof
+\usepackage{blindtext}
+\usepackage{hyperref}
+% -----
+\usepackage[sorting=none]{biblatex} %Imports biblatex package, sort references according to appearance in text
+\addbibresource{syssec.bib} %Import the bibliography file
+
+% --- lslistings style ---
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{verde}{rgb}{0.25,0.5,0.35}
+\definecolor{jpurple}{rgb}{0.5,0,0.35}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}

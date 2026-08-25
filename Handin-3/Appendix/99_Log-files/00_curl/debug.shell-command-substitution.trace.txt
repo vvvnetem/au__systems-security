@@ -1,0 +1,32 @@
+== Info:   Trying 10.9.0.5:80...
+== Info: TCP_NODELAY set
+== Info: Connected to 10.9.0.5 (10.9.0.5) port 80 (#0)
+=> Send header, 87 bytes (0x57)
+0000: 47 45 54 20 2f 63 67 69 2d 62 69 6e 2f 76 75 6c GET /cgi-bin/vul
+0010: 2e 63 67 69 20 48 54 54 50 2f 31 2e 31 0d 0a 48 .cgi HTTP/1.1..H
+0020: 6f 73 74 3a 20 31 30 2e 39 2e 30 2e 35 0d 0a 55 ost: 10.9.0.5..U
+0030: 73 65 72 2d 41 67 65 6e 74 3a 20 63 75 72 6c 2f ser-Agent: curl/
+0040: 37 2e 36 38 2e 30 0d 0a 41 63 63 65 70 74 3a 20 7.68.0..Accept:
+0050: 2a 2f 2a 0d 0a 0d 0a                            */*....
+== Info: Mark bundle as not supporting multiuse
+<= Recv header, 17 bytes (0x11)
+0000: 48 54 54 50 2f 31 2e 31 20 32 30 30 20 4f 4b 0d HTTP/1.1 200 OK.
+0010: 0a                                              .
+<= Recv header, 37 bytes (0x25)
+0000: 44 61 74 65 3a 20 54 68 75 2c 20 31 30 20 41 70 Date: Thu, 10 Ap
+0010: 72 20 32 30 32 35 20 30 39 3a 35 31 3a 34 38 20 r 2025 09:51:48
+0020: 47 4d 54 0d 0a                                  GMT..
+<= Recv header, 32 bytes (0x20)
+0000: 53 65 72 76 65 72 3a 20 41 70 61 63 68 65 2f 32 Server: Apache/2
+0010: 2e 34 2e 34 31 20 28 55 62 75 6e 74 75 29 0d 0a .4.41 (Ubuntu)..
+<= Recv header, 20 bytes (0x14)
+0000: 43 6f 6e 74 65 6e 74 2d 4c 65 6e 67 74 68 3a 20 Content-Length:
+0010: 31 33 0d 0a                                     13..
+<= Recv header, 26 bytes (0x1a)
+0000: 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74 65 Content-Type: te
+0010: 78 74 2f 70 6c 61 69 6e 0d 0a                   xt/plain..
+<= Recv header, 2 bytes (0x2)
+0000: 0d 0a                                           ..
+<= Recv data, 13 bytes (0xd)
+0000: 0a 48 65 6c 6c 6f 20 57 6f 72 6c 64 0a          .Hello World.
+== Info: Connection #0 to host 10.9.0.5 left intact

