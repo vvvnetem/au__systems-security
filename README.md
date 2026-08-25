@@ -1,6 +1,4 @@
-# Description
-
-Repository for Systems Security course.
+# Course Description
 
 Refer to: [https://kursuskatalog.au.dk/en/course/138666/Systems-Security]
 
