@@ -1,0 +1,24 @@
+\subsection{Scapy Ethernet Layer}
+\label{apx:ethernet}
+
+One can use the command \lstinline{ls(Ether)} to get an information about \textit{Scapy}'s \cite{scapy2024} \lstinline{Ethernet} layer:
+
+\begin{lstlisting}[language=python, caption=Scapy Ether Layer]
+dst        : DestMACField                        = ('None')
+src        : SourceMACField                      = ('None')
+type       : XShortEnumField                     = ('36864')
+\end{lstlisting}
+
+One can use the command \lstinline{ls(ARP)} to get an information about \textit{Scapy}'s \cite{scapy2024} \lstinline{ARP} layer:
+
+\begin{lstlisting}[language=python, caption=Scapy ARP Layer]
+hwtype     : XShortEnumField                     = ('1')
+ptype      : XShortEnumField                     = ('2048')
+hwlen      : FieldLenField                       = ('None')
+plen       : FieldLenField                       = ('None')
+op         : ShortEnumField                      = ('1')
+hwsrc      : MultipleTypeField (SourceMACField, StrFixedLenField) = ('None')
+psrc       : MultipleTypeField (SourceIPField, SourceIP6Field, StrFixedLenField) = ('None')
+hwdst      : MultipleTypeField (MACField, StrFixedLenField) = ('None')
+pdst       : MultipleTypeField (IPField, IP6Field, StrFixedLenField) = ('None')
+\end{lstlisting}

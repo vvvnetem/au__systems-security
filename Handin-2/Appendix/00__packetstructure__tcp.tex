@@ -1,0 +1,21 @@
+\subsection{TCP Packet Structure}
+\label{apx:tcp}
+
+One can use the command \lstinline{ls(TCP)} to get an information about \textit{Scapy}'s \cite{scapy2024} \lstinline{TCP} layer:
+
+\begin{lstlisting}[language=python, caption=Scapy TCP Layer]
+version    : BitField  (4 bits)                  = ('4')
+ihl        : BitField  (4 bits)                  = ('None')
+tos        : XByteField                          = ('0')
+len        : ShortField                          = ('None')
+id         : ShortField                          = ('1')
+flags      : FlagsField                          = ('<Flag 0 ()>')
+frag       : BitField  (13 bits)                 = ('0')
+ttl        : ByteField                           = ('64')
+proto      : ByteEnumField                       = ('0')
+chksum     : XShortField                         = ('None')
+src        : SourceIPField                       = ('None')
+dst        : DestIPField                         = ('None')
+options    : PacketListField                     = ('[]')
+\end{lstlisting}
+

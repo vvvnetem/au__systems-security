@@ -1,0 +1,26 @@
+\subsection{Scapy ICMP Layer}
+\label{apx:icmp}
+
+One can use the command \lstinline{ls(ICMP)} to get an information about \textit{Scapy}'s \cite{scapy2024} \lstinline{ICMP} layer:
+
+\begin{lstlisting}[language=python, caption=Scapy ICMP Layer]
+type       : ByteEnumField                       = ('8')
+code       : MultiEnumField (Depends on 8)       = ('0')
+chksum     : XShortField                         = ('None')
+id         : XShortField (Cond)                  = ('0')
+seq        : XShortField (Cond)                  = ('0')
+ts_ori     : ICMPTimeStampField (Cond)           = ('72829031')
+ts_rx      : ICMPTimeStampField (Cond)           = ('72829031')
+ts_tx      : ICMPTimeStampField (Cond)           = ('72829031')
+gw         : IPField (Cond)                      = ("'0.0.0.0'")
+ptr        : ByteField (Cond)                    = ('0')
+reserved   : ByteField (Cond)                    = ('0')
+length     : ByteField (Cond)                    = ('0')
+addr_mask  : IPField (Cond)                      = ("'0.0.0.0'")
+nexthopmtu : ShortField (Cond)                   = ('0')
+unused     : MultipleTypeField (ShortField, IntField, StrFixedLenField) = ("b''")
+extpad     : _ICMPExtensionPadField (Cond)       = ("b''")
+ext        : _ICMPExtensionField (Cond)          = ('None')
+\end{lstlisting}
+
+Where \lstinline{type} refers to \lstinline{ICMP} type according to \lstinline{RFC 792}, \lstinline{RFC 2780}

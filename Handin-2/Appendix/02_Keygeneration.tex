@@ -1,0 +1,286 @@
+For Client and Server key/certificate generation I used the program \lstinline{openssl}\ref{openssl.keygen}.
+
+The following code snippet showcases the \textit{Server} key generation of \lstinline{00_keygen.sh} script. Please note: For the actual test environment, the \lstinline{00_keygen.sh} should be sourced\cite{shell.bash} within the container environment,as can be seen within the \textit{Dockerfiles}\ref{apx:dockerfile.serverfile, apx:dockerfile.clientfile}
+
+\subsection{Overview of openssl key generation with \textit{00\_keygen.sh}}
+\label{apx:lab-final_keygen}
+
+\begin{lstlisting}[language=bash, caption=openssl keygeneration script]
+#!/bin/ash
+
+# ========================================
+# Openssl key/certificate generator script
+# ----------------------------------------
+
+# Host Key/Certification generation according to `cert.conf` contents.
+# The functions accepts 2 input parameters:
+# 	`server`	:= server key/certificate generation
+# 	`client` 	:= client key/certificate generation 
+
+# Please note: For this assignment I vpn-server is the same as CA and Intermediary Server
+
+# The file is being sourced trough dotfiles, hence
+# the function is usable as a command as follows:
+#
+# host_keygen server	:= generates server ca/key
+# host_keygen client	:= generates client ca/key
+
+# Please note: The script is meant to be used as beign sourced
+# Please refer to the `source` command arguments in the dockerfiles
+host_keygen() {
+
+echo
+echo "======================================================"
+echo "Client/Server keypair generation using OpenSSL library"
+echo "======================================================"
+echo
+
+# Choose Server/Client
+HOST_MODE=$1
+	case $HOST_MODE in
+		
+		# Generating server key/certificate using group 'prime256v1' according to RFC 3279
+		server)
+	
+		export NAME_TAG="$(hostname)"
+		export CERT_CONF="cert.conf"
+		export CA_KEY_NAME="CA_KeyFile"
+		export CA_CERT_NAME="CA_Certificate"
+		export TRUST_STORE="/etc/ssl/certs/"
+		export TRUST_KEY_STORE="/etc/ssl/private/"
+		export SHARED_DIR="/volumes/inter"
+			echo
+			echo "Generating the Root CA certificate as $NAME_TAG"
+			echo "---------------------------------------------------------"
+			echo
+			
+				# Key/CA generation based on 2048-bit RSA
+				# .......................................
+				openssl genrsa -out "$CA_KEY_NAME".pem 2048
+				
+				echo "Generate the Root CA's self-signed certificate: "
+				echo "---------------------------------------------------------"
+				openssl req -new -x509 -days 365 -sha256 -key "$CA_KEY_NAME".pem -config "$CERT_CONF" -out "$CA_CERT_NAME".crt
+
+				echo 'Check Certificate Content:'
+				echo "---------------------------------------------------------"
+				openssl x509 -in "$CA_CERT_NAME".crt -text -noout
+
+				# Key/CA generation based on Elliptice Curves
+				# ...........................................
+				# Store keyfiles un-encrypted on disk (PEM):
+				#openssl ecparam -name prime256v1 -genkey -noout -out "$NAME_TAG"_ec_server.pem
+                # Generate a Certificate Signing Request (CSR)
+				# Template: cert.conf
+				#openssl req -new -key "$NAME_TAG"_ec_server.pem -out "$NAME_TAG"_ec_server.csr --config ca.conf
+
+		export INTER_KEY_NAME="Inter_KeyFile"
+		export INTER_CSR_NAME="Inter_CSR_Certificate"
+		export INTER_CERT_NAME="Inter_Certificate"
+		export COMBINED_CERT_NAME="combined"
+			echo	
+			echo "Generating Intermediary certificate as $NAME_TAG"
+			echo "---------------------------------------------------------"
+			echo
+				openssl genrsa -out "$INTER_KEY_NAME".pem 2048
+				openssl req -new -sha256 -key "$INTER_KEY_NAME".pem -config "$CERT_CONF" -out "$INTER_CSR_NAME".csr
+
+			echo 
+			echo 'Issue the signed certificate for Intermediate Certificate'
+			echo "---------------------------------------------------------"
+			openssl x509 -days 365 -req -in "$INTER_CSR_NAME".csr -CA "$CA_CERT_NAME".crt -CAkey "$CA_KEY_NAME".pem -CAcreateserial -out "$INTER_CERT_NAME".crt
+			
+			echo
+			echo "Updating Trusted Stores of Server: $NAME_TAG"
+			echo "---------------------------------------------------------"
+			
+			# Create a combined cert: 
+			cat "$INTER_CERT_NAME".crt "$CA_CERT_NAME".crt > "$COMBINED_CERT_NAME".crt
+			
+			cp "$CA_CERT_NAME".* "$INTER_CERT_NAME".crt "$COMBINED_CERT_NAME".crt "$TRUST_STORE"
+			cp *.pem "$TRUST_KEY_STORE"
+			update-ca-certificates
+			echo "Trusted Store updated."
+
+			echo
+			echo "Moving files to $SHARED_DIR"
+			echo "---------------------------------------------------------"
+			cp "$CA_CERT_NAME".* "$INTER_CERT_NAME".crt "$COMBINED_CERT_NAME".crt "$SHARED_DIR"
+						
+			
+				# Key/CA generation based on Elliptice Curves
+				# ...........................................
+				# Generate a Self-Signed Server Certificate:
+				#openssl x509 -req -in "$NAME_TAG"_ec_server.csr -signkey "$NAME_TAG"_ec_server.pem -out "$NAME_TAG"_ec_server-cert.pem -days 365
+                # Check the Server certification:
+				#openssl x509 -in "$NAME_TAG"_ec_server-cert.pem -text -noout
+                # Check the private key
+				#openssl ec -in "$NAME_TAG"_ec_server.pem -text -noout
+		
+			#echo
+			#echo "Writing file checksums to SHA256SUMS_"$NAME_TAG"_ec_server.txt"
+			#echo ".............................................................."
+			#echo
+
+			# Writing sha256sums of the generated files
+			#sha256sum "$NAME_TAG"_ec_server* > SHA256SUMS_"$NAME_TAG".txt
+		unset NAME_TAG
+		unset CERT_CONF
+		unset CA_KEY_NAME
+		unset CA_CERT_NAME
+		unset INTER_KEY_NAME
+		unset INTER_CSR_NAME
+		unset INTER_CERT_NAME
+		unset SHARED_DIR
+			;;
+		
+		# Generating client key/certificate using group "prime256v1" according to RFC 3279
+		client)
+
+		export NAME_TAG="$(hostname)"
+		export CERT_CONF="cert.conf"
+		export CA_KEY_NAME="CA_KeyFile"
+		export CA_CERT_NAME="CA_Certificate"
+		export INTER_KEY_NAME="Inter_KeyFile"
+		export INTER_CSR_NAME="Inter_CSR_Certificate"
+		export INTER_CERT_NAME="Inter_Certificate"
+
+		export USER_KEY_NAME="User_KeyFile"
+		export USER_CSR_NAME="User_CSR_Certificate"
+		export USER_CERT_NAME="User_Certificate"
+		export USER_PUBKEY_NAME="PublicKey"
+
+		export COMBINED_CERT_NAME="combined"
+		export TRUST_STORE="/etc/ssl/certs/"
+		export TRUST_KEY_STORE="/etc/ssl/private/"
+		export SHARED_DIR="/volumes/inter"
+
+
+			echo
+			echo "Generating Client Certificate for $NAME_TAG"
+			echo "---------------------------------------------------------"
+			echo
+			
+			# Generate User's RSA key.
+			openssl genrsa -out User_KeyFile.pem 2048
+			
+			# Generate a CSR that includes the intermediate certificate public key.
+			# Please note, for this assignment CA is equalst to Intermediary Server
+			openssl req -new -sha256 -key "$USER_KEY_NAME".pem -config "$CERT_CONF" -out "$USER_CSR_NAME".csr
+			
+			# Allow the intermediate certificate to issue the signed certificate for the user certificate.
+			openssl x509 -days 365 -req -in "$USER_CSR_NAME".csr -CA "$INTER_CERT_NAME".crt -CAkey "$INTER_KEY_NAME".pem -CAcreateserial -out "$USER_CERT_NAME".crt
+			
+			# Get User public key
+			openssl x509 -pubkey -noout -in "$USER_CERT_NAME".crt > "$USER_PUBKEY_NAME".pem
+			
+			echo
+			echo "Updating Trusted Stores of Client: $NAME_TAG"
+			echo "---------------------------------------------------------"
+			
+			cp /volume/inter/* .
+			cp "$CA_CERT_NAME".* "$INTER_CERT_NAME"* "$COMBINED_CERT_NAME".crt   "$USER_CERT_NAME"* "$TRUST_STORE"
+			cp *.pem "$TRUST_KEY_STORE"
+			
+			update-ca-certificates
+			echo "Trusted Store updated."
+				# Key/CA generation based on Elliptice Curves
+				# ...........................................
+				# Store keyfiles un-encrypted on disk (PEM):
+                #openssl ecparam -name prime256v1 -genkey -noout -out "$NAME_TAG"_ec_client.pem
+                # Generate a Certificate Signing Request (CSR)
+                # Template: ca.conf
+                #openssl req -new -key "$NAME_TAG"_ec_client.pem -out "$NAME_TAG"_ec_client.csr --config ca.conf
+
+
+
+				# Key/CA generation based on Elliptice Curves
+				# ...........................................
+				# Generate a Self-Signed Client Certificate:
+                #openssl x509 -req -in "$NAME_TAG"_ec_client.csr -signkey "$NAME_TAG"_ec_client.pem -out "$NAME_TAG"_ec_client-cert.pem -days 365
+                # Check the Client certification:
+                #openssl x509 -in "$NAME_TAG"_ec_client-cert.pem -text -noout
+                # Check the private key
+                #openssl ec -in "$NAME_TAG"_ec_client.pem -text -noout
+
+#			echo
+#			echo "Writing file checksums to SHA256SUMS_"$NAME_TAG"_ec_client.txt"
+#			echo ".............................................................."
+#			echo
+
+			# Writing sha256sums of the generated files
+#			sha256sum "$NAME_TAG"_ec_client* > SHA256SUMS_"$NAME_TAG".txt
+
+		unset NAME_TAG
+
+
+			;;
+
+		*)
+			echo "Error: Key/ca generation failed. Argument is missing: Write 'server' or 'client' as an argument !"
+			echo
+			echo "Example usage for Server key/certificate generation: "
+			echo "host_keygen server"
+			echo
+			echo "Example usage for Client key/certificate generation:"
+			echo "host_keygen client"
+			;;
+esac
+}
+\end{lstlisting}
+
+
+
+The \lstinline{openssl} script uses the config file \lstinline{cert.conf} for certificate generation. The following snippet showcases a small piece of the code, for the full content please refer to the file \lstinline{cert.conf}: 
+
+\begin{lstlisting}[language=bash, caption=config file snippet for openssl certification template ]
+[ req ]
+default_bits       = 2048
+default_md         = sha256
+distinguished_name = req_distinguished_name
+prompt             = no
+string_mask        = utf8only
+req_extensions     = req_ext
+
+[ req_distinguished_name ]
+C            = DA
+ST           = AARHUS
+L            = AARHUS
+O            = Aarhus_University
+OU           = Systems_Security
+CN           = vpn-server-10.9.0.11
+emailAddress = @post.au.dk
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = vpn-server-10.9.0.11
+IP.1  = 10.9.0.11
+
+[ v3_ca ]
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints       = critical, CA:true
+keyUsage               = critical, digitalSignature, cRLSign, keyCertSign
+
+[ v3_intermediate_ca ]
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints       = critical, CA:true, pathlen:0
+keyUsage               = critical, digitalSignature, cRLSign, keyCertSign
+
+[ usr_cert ]
+basicConstraints       = CA:FALSE
+nsCertType             = client, email
+nsComment              = "Client Certificate"
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage               = critical, digitalSignature, keyEncipherment
+extendedKeyUsage       = clientAuth, emailProtection
+
+\end{lstlisting}
+
+For the complete generation of Client/Server side key/certification generation
+please see  the file \lstinline{00_keygen.sh}.
+
