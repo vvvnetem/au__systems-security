@@ -1,18 +1,18 @@
 # Course Description
 
-Refer to: [https://kursuskatalog.au.dk/en/course/138666/Systems-Security]
+For the official course description and additional information, refer to: [https://kursuskatalog.au.dk/en/course/138666/Systems-Security]
 
-## Handin 1
+## Handin 1: RSA-OAEP implementation
 
-RSA-OAEP implementation
+Implementation of the RSA-OAEP encryption scheme.
 
-## Handin 2
+## Handin 2: TLS-based VPN tunelling
 
-TLS-based VPN tunelling
+Implementation of a TLS-based VPN tunnel.
 
-## Handin 3
+## Handin 3: Analysis of Shellshock vulnerability
 
-Analysis of Shellshock vulnerability
+Analysis of the Shellshock vulnerability, including its underlying cause and security implications.
 
 ## Final Project
 
